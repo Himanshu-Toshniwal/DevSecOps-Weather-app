@@ -71,7 +71,9 @@ pipeline {
         }
         stage ("Deploy to Container") {
             steps {
-                sh 'docker run -d --name weather-app -p 8080:80 himanshutoshniwal7570/weather-app:latest'
+                sh 'docker stop weather-app || true'
+                sh 'docker rm weather-app || true'
+                sh 'docker run -d --name weather-app -p 8081:80 himanshutoshniwal7570/weather-app:latest'
             }
         }
     }
